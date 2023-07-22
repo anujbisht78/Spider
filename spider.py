@@ -79,6 +79,12 @@ if __name__=="__main__":
             
         elif "spider can you please open command prompt" in query:
             os.system("start cmd")
+        
+        elif "spider can you please open facebook" in query:
+            Fbpath="https://www.facebook.com/"
+            os.startfile(Fbpath)
+            
+    
             
         elif "spider can you please open camera" in query:
             cap=cv2.VideoCapture(0) #0:internal camera, 1:external camera
