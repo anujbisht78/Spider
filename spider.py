@@ -6,18 +6,16 @@ import cv2
 from requests import get  # we are only importing the get function from request
 import wikipedia  # searching the wikipedia
 import webbrowser
-import pywhatkit 
+import pywhatkit as kit
 
 
 engine = pyttsx3.init('sapi5')  # creating a voice engine
 voices = engine.getProperty('voices')
 # print(voices[1].id) id of the voices 0:david and 1:zira
 # it will activate the voices from engine
-engine.setProperty('voices', voices[1].id)
+engine.setProperty('voices', voices[0].id)
 
 # making a function that will convert text into speech
-
-
 def speak(audio):  # creating an audio file
     print('Spider:', audio)
     engine.say(audio)
@@ -26,8 +24,6 @@ def speak(audio):  # creating an audio file
     # return "none"
 
 # To take input from the user, to convert voice into text
-
-
 def takecommand():
     r = sr.Recognizer()  # to define the recognizer
     with sr.Microphone() as source:  # connecting the microphone
@@ -47,7 +43,6 @@ def takecommand():
         return "none"
     return query
 
-
 # to wish
 def wish():
     hour = int(datetime.datetime.now().hour)
@@ -55,13 +50,12 @@ def wish():
         speak("Good Morning Sir!")
     elif hour >= 12 and hour <= 15:
         speak("Good Afternoon Sir!")
-    elif hour > 15 and hour <= 18:
+    elif hour > 15 and hour <= 20:
         speak("Good Evening Sir!")
     else:
-        speak("Good Night Sir!")
+        speak("Hello Sir!")
 
     speak("I am Spider. Please tell me How can i help you!")
-
 
 if __name__ == "__main__":
     # takecommand()
@@ -113,7 +107,7 @@ if __name__ == "__main__":
         elif "spider can you please play music" in query:
             Spath = "https://www.spotify.com/"
             os.startfile(Spath)
-
+        
         # performing the online task
         # to get the ip address from the get function of request module
         elif "spider what is the ip address" in query:
@@ -136,5 +130,18 @@ if __name__ == "__main__":
             speak("According to wikipedia:")  # spider will speak
             speak(results)  # speaking the result from the website
             # print(results)  # and printing it
+            
+        #to send whatsapp message
+        elif "spider can you please send a message" in query:
+            # speak("sir to whome i send message ?")
+            # msg=takecommand().lower()
+            kit.sendwhatmsg("+919311671110","I LOVE YOU SO MUCH",22,15) 
+        
+            
+            
+         
+            
+           
+            
             
         
