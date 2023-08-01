@@ -7,6 +7,8 @@ from requests import get  # we are only importing the get function from request
 import wikipedia  # searching the wikipedia
 import webbrowser
 import pywhatkit as kit
+import smtplib
+from smtplib import SMTP
 
 
 engine = pyttsx3.init('sapi5')  # creating a voice engine
@@ -56,6 +58,15 @@ def wish():
         speak("Hello Sir!")
 
     speak("I am Spider. Please tell me How can i help you!")
+
+"""sending email function"""
+def sendemail(id,content):
+    server=smtplib.SMTP("smtp.gmail.com",587)
+    server.ehlo()
+    server.starttls()
+    server.login('anujbisht3540@gmail.com','#anuj@7840')
+    server.sendmail('anujbisht3540@gmail.com',id,content)
+    server.close()
 
 if __name__ == "__main__":
     # takecommand()
@@ -131,11 +142,48 @@ if __name__ == "__main__":
             speak(results)  # speaking the result from the website
             # print(results)  # and printing it
             
-        #to send whatsapp message
+        #to send whatsapp message 
         elif "spider can you please send a message" in query:
             # speak("sir to whome i send message ?")
             # msg=takecommand().lower()
-            kit.sendwhatmsg("+919311671110","I LOVE YOU SO MUCH",22,15) 
+            kit.sendwhatmsg("+919311671110","Good Evening",22,15) 
+        
+        #playing song on youtube    
+        elif "spider play a song on youtube" in query:
+            speak("sir which song you want me to play")
+            song=takecommand().lower()
+            kit.playonyt(f"{song}")
+        
+        #sending email to anyone
+        # elif "spider send an email" in query:
+        #     try:
+        #         speak("sir to whome i send email")
+        #         cmmd=takecommand().lower()
+        #         speak("sir whats the gmail id")
+        #         id=str(input())
+        #         speak("sir what should i say")
+        #         content=takecommand().lower()
+        #         sendemail(id,content)
+        #         speak("email has been sent")
+                   
+        #     except Exception as e:
+        #         print(e)
+        #         speak("sorry sir i am not able to send")
+        
+        elif "send email to anuj" in query:
+            try:
+                speak("what should i say")
+                to="anujbisht3540@gmail.com"
+                content=takecommand().lower()
+                sendemail(to,content)
+                speak("email has been sent")
+            except Exception as e:
+                print(e)
+                speak("sorry sir i am not able to send")
+                
+                
+             
+            
         
             
             
